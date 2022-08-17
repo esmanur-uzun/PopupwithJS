@@ -1,27 +1,27 @@
-// const popup = {
-//     btn: document.querySelector(".msg-btn"),
-//     msgInput: document.querySelector(".msg-input"),
-//     sendMessage(){
-//        const newmsg = this.msgInput.value
-//         console.log(newmsg)
-//     },
-//     onSubmit(){
-//         this.btn.addEventListener("click",this.sendMessage)
-//     }
-// }
-// popup.onSubmit()
 
-const btn = document.querySelector(".msg-btn")
+const modalOpen = document.querySelector(".msg-btn")
 const msgInput = document.querySelector(".msg-input")
+const closeModal = document.querySelector("body")
+const modalMsg = document.querySelector(".modal-msg")
 
-btn.addEventListener("click",sendMessage)
-
-function sendMessage(){
-    console.log(msgInput.value)
-    msgInput.value= ""
-    openPopup(msgInput.value)
-}
+msgInput.addEventListener("keypress",(e) =>{
+    if(e.key === "Enter"){
+        openPopup(msgInput.value)
+        modalOpen.click()
+        msgInput.value = ""
+        e.preventDefault()
+    }
+})
 
 function openPopup(message){
-
+    const msg = document.querySelector("p")
+    msg.innerText= message
+    modalMsg.style.display = "flex"
 }
+closeModal.addEventListener("click",(e) =>{
+    
+    if(e.target.className === "modal-msg text-center" || e.target.className === "btn close-modal" || e.target.className === "fa fa-times"){
+         modalMsg.style.display = "none"
+    }
+   
+})
